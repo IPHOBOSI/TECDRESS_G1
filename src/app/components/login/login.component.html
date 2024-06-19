@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                <h1>Crear Cuenta</h1>
+                <span>Crea tus credenciales</span>
+
+                <div class="grid-container">
+                    <div class="grid-item">
+                        <mat-form-field appearance="fill" class="styled-input">
+                            <mat-label>Tipo de Usuario</mat-label>
+                            <mat-select formControlName="userType" required>
+                                <mat-option value="Administrador">Administrador</mat-option>
+                                <mat-option value="Cliente">Cliente</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="registerForm.get('userType')?.hasError('required') && registerForm.get('userType')?.touched">
+                            <span style="color: red">Este campo es obligatorio</span>
+                        </div>
+
+                        <mat-form-field appearance="fill" class="styled-input">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="firstName" required>
+                        </mat-form-field>
+                        <div *ngIf="registerForm.get('firstName')?.hasError('required') && registerForm.get('firstName')?.touched">
+                            <span style="color: red">Este campo es obligatorio</span>
+                        </div>
+
+                        <mat-form-field appearance="fill" class="styled-input">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput formControlName="lastName" required>
+                        </mat-form-field>
+                        <div *ngIf="registerForm.get('lastName')?.hasError('required') && registerForm.get('lastName')?.touched">
+                            <span style="color: red">Este campo es obligatorio</span>
+                        </div>
+                    </div>
+
+                    <div class="grid-item">
+                        <mat-form-field appearance="fill" class="styled-input">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" type="email" required>
+                        </mat-form-field>
+                        <div *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+                            <span style="color: red">Este campo es obligatorio</span>
+                        </div>
+
+                        <mat-form-field appearance="fill" class="styled-input">
+                            <mat-label>Teléfono</mat-label>
+                            <input matInput formControlName="phone" type="tel" required>
+                        </mat-form-field>
+                        <div *ngIf="registerForm.get('phone')?.hasError('required') && registerForm.get('phone')?.touched">
+                            <span style="color: red">Este campo es obligatorio</span>
+                        </div>
+
+                        <mat-form-field appearance="fill" class="styled-input">
+                            <mat-label>Usuario</mat-label>
+                            <input matInput formControlName="username" required>
+                        </mat-form-field>
+                        <div *ngIf="registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched">
+                            <span style="color: red">Este campo es obligatorio</span>
+                        </div>
+
+                        <mat-form-field appearance="fill" class="styled-input">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput formControlName="password" type="password" required>
+                        </mat-form-field>
+                        <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+                            <span style="color: red">Este campo es obligatorio</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="registerUserButton" type="submit">Registrar</button>
+            </form>
+        </div>
+
+        <div class="form-container sign-in">
+            <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+                <h1>¡Inicia sesión!</h1>
+                <span>Usa tus credenciales según corresponda</span>
+
+                <mat-form-field appearance="fill" class="styled-input">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput formControlName="userName" required>
+                </mat-form-field>
+                <div *ngIf="loginForm.get('userName')?.hasError('required') && loginForm.get('userName')?.touched">
+                    <span style="color: red">Este campo es obligatorio</span>
+                </div>
+
+                <mat-form-field appearance="fill" class="styled-input">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="password" type="password" required>
+                </mat-form-field>
+                <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+                    <span style="color: red">Este campo es obligatorio</span>
+                </div>
+
+                <button type="submit" [disabled]="loginForm.invalid">Iniciar sesión</button>
+                <button type="button" (click)="cancel()">Cancelar</button>
+                <button type="button" routerLink="/dashboard">Ver modulos sin login</button>
+            </form>
+        </div>
+
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>¡Bienvenido denuevo!</h1>
+                    <p>Ingresa tu información personal para utilizar las funciones disponibles</p>
+                    <button class="hidden" id="login">Iniciar sesión</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>¡Hola!, ¿Listo para empezar?</h1>
+                    <p>Registrate con tu información personal para utilizar las funciones disponibles</p>
+                    <button class="hidden" id="register">Registrate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
